@@ -144,16 +144,21 @@ class YandexQuery(MultipleResultsQuery):
 
     _URL = 'https://geocode-maps.yandex.ru/1.x/'
     _RESULT_CLASS = YandexResult
-    _KEY_MANDATORY = False
 
     def _build_params(self, location, provider_key, **kwargs):
-        return {
+        
+        params = {
             'geocode': location,
+            'apikey': provider_key,
             'lang': kwargs.get('lang', 'en-US'),
-            'kind': kwargs.get('kind', ''),
             'format': 'json',
             'results': kwargs.get('maxRows', 1),
         }
+        
+        if kwargs.get('kind', False):
+            params.update{'kind': kwargs['kind']}
+        
+        return params
 
     def _adapt_results(self, json_response):
         return [item['GeoObject'] for item
