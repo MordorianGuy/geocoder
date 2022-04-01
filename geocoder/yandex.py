@@ -156,7 +156,7 @@ class YandexQuery(MultipleResultsQuery):
         }
         
         if kwargs.get('kind', False):
-            params.update{'kind': kwargs['kind']}
+            params.update({'kind': kwargs['kind']})
         
         return params
 
