@@ -27,7 +27,7 @@ class YandexResult(OneResult):
 
     @property
     def bbox(self):
-        envelope = self._meta_data.get('boundedBy', {}).get('Envelope', {})
+        envelope = self.raw.get('boundedBy', {}).get('Envelope', {})
         if envelope:
             east, north = envelope.get('upperCorner', '').split(' ')
             west, south = envelope.get('lowerCorner', '').split(' ')
